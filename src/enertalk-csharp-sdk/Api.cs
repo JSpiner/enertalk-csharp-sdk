@@ -38,7 +38,7 @@ namespace Enertalk
             };
             
             string url = "https://enertalk-auth.encoredtech.com/token";
-            _token = await SendWebRequest<Token>(HttpMethod.Post, url, value);
+            _token = await SendWebRequestAsync<Token>(HttpMethod.Post, url, value);
             _token.TokenType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(_token.TokenType);
 
             IsAuthorized = true;
@@ -57,7 +57,7 @@ namespace Enertalk
             _token = null;
 
             string url = "https://enertalk-auth.encoredtech.com/refresh";
-            _token = await SendWebRequest<Token>(HttpMethod.Post, url, value);
+            _token = await SendWebRequestAsync<Token>(HttpMethod.Post, url, value);
             _token.TokenType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(_token.TokenType);
 
             IsAuthorized = true;
@@ -69,7 +69,7 @@ namespace Enertalk
                 throw new InvalidOperationException();
 
             string url = "https://api.encoredtech.com/1.2/devices/list";
-            return await SendWebRequest<Device[]>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<Device[]>(HttpMethod.Get, url);
         }
 
         public async Task<PlugRelayStatus> GetPlugRelayStatusAsync(string deviceId)
@@ -79,7 +79,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/relay";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PlugRelayStatus>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<PlugRelayStatus>(HttpMethod.Get, url);
         }
 
         public async Task<PlugRelayStatus> TogglePlugRelayStatusAsync(string deviceId, string mode)
@@ -89,7 +89,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/relay?mode={1}";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PlugRelayStatus>(HttpMethod.Put, url, mode);
+            return await SendWebRequestAsync<PlugRelayStatus>(HttpMethod.Put, url, mode);
         }
 
         public async Task<RealtimeUsage> GetRealtimeUsageAsync(string deviceId)
@@ -99,7 +99,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/realtimeUsage";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<RealtimeUsage>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<RealtimeUsage>(HttpMethod.Get, url);
         }
 
         public async Task<PushNotificationStatus> TogglePushServiceAsync(string deviceId, bool enabled)
@@ -114,7 +114,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Put, url, value);
+            return await SendWebRequestAsync<PushNotificationStatus>(HttpMethod.Put, url, value);
         }
 
         public async Task<PushNotificationStatus> GetPushNotificationSettingAsync(string deviceId)
@@ -124,7 +124,7 @@ namespace Enertalk
             
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<PushNotificationStatus>(HttpMethod.Get, url);
         }
 
         public async Task<PushNotificationStatus> RegisterPushIdAsync(string deviceId, bool registerId)
@@ -140,7 +140,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Post, url, value);
+            return await SendWebRequestAsync<PushNotificationStatus>(HttpMethod.Post, url, value);
         }
 
         public async Task<ForcastUsage> GetDeviceForecastUsageAsync(string deviceId)
@@ -150,7 +150,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/forecastUsage";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<ForcastUsage>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<ForcastUsage>(HttpMethod.Get, url);
         }
 
         public async Task<DeviceInformation> GetDeviceInformationAsync(string deviceId)
@@ -160,7 +160,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<DeviceInformation>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<DeviceInformation>(HttpMethod.Get, url);
         }
 
         public async Task<MeteringUsage> GetDeviceMeteringUsageAsync(string deviceId)
@@ -170,7 +170,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsage";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<MeteringUsage>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<MeteringUsage>(HttpMethod.Get, url);
         }
 
         public async Task<MeteringUsage[]> GetDeviceMeteringUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
@@ -186,7 +186,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsages";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<MeteringUsage[]>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<MeteringUsage[]>(HttpMethod.Get, url);
         }
 
         public async Task<PeriodicUsages[]> GetDevicePeriodicUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
@@ -203,7 +203,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/usages";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<PeriodicUsages[]>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<PeriodicUsages[]>(HttpMethod.Get, url);
         }
 
         public async Task<RealtimeUsage> GetRealtimeUsagesAsync(string deviceId)
@@ -213,7 +213,7 @@ namespace Enertalk
             
             string template = "https://api.encoredtech.com/1.2/devices/{0}/realtimeUsage";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<RealtimeUsage>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<RealtimeUsage>(HttpMethod.Get, url);
         }
 
         public async Task<UserInformation> GetUserInformationAsync()
@@ -223,7 +223,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/me";
             string url = string.Format(template);
-            return await SendWebRequest<UserInformation>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<UserInformation>(HttpMethod.Get, url);
         }
 
         public async Task UpdateUserInformationAsync(string deviceId, UserInformation userInformation)
@@ -233,10 +233,10 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/me";
             string url = string.Format(template);
-            await SendWebRequest(HttpMethod.Put, url, userInformation);
+            await SendWebRequestAsync(HttpMethod.Put, url, userInformation);
         }
 
-        private async Task SendWebRequest(HttpMethod method, string url, object value = null)
+        private async Task SendWebRequestAsync(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
             {
@@ -264,7 +264,7 @@ namespace Enertalk
             }
         }
 
-        private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
+        private async Task<T> SendWebRequestAsync<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
             {
