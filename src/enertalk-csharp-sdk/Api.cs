@@ -226,6 +226,16 @@ namespace Enertalk
             return await SendWebRequest<UserInformation>(HttpMethod.Get, url);
         }
 
+        public async Task<UserInformation> UpdateUserInformationAsync(string deviceId, UserInformation userInformation)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            string template = "https://api.encoredtech.com/1.2/me";
+            string url = string.Format(template);
+            return await SendWebRequest<UserInformation>(HttpMethod.Put, url, userInformation);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
