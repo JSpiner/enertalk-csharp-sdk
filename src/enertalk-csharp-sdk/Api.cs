@@ -82,6 +82,16 @@ namespace Enertalk
             return await SendWebRequest<PlugRelayStatus>(HttpMethod.Get, url);
         }
 
+        public async Task<PlugRelayStatus> TogglePlugRelayStatusAsync(string deviceId, string mode)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/relay?mode={1}";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<PlugRelayStatus>(HttpMethod.Put, url, mode);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
