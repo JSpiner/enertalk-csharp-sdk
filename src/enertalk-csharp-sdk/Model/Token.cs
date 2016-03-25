@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Enertalk.Model
 {
-    class Token
+    public class Token
     {
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
