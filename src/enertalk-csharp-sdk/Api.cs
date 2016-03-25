@@ -117,6 +117,16 @@ namespace Enertalk
             return await SendWebRequest<Status>(HttpMethod.Put, url, value);
         }
 
+        public async Task<Status> GetPushNotificationSettingAsync(string deviceId)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+            
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<Status>(HttpMethod.Get, url);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
