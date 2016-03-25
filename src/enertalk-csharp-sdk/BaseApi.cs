@@ -44,7 +44,7 @@ namespace Enertalk
             IsAuthorized = true;
         }
 
-        public async Task RefreshToken()
+        public async Task RefreshTokenAsync()
         {
             IsAuthorized = false;
 
