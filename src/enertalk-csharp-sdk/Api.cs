@@ -206,6 +206,16 @@ namespace Enertalk
             return await SendWebRequest<PeriodicUsages[]>(HttpMethod.Get, url);
         }
 
+        public async Task<RealtimeUsage> GetRealtimeUsagesAsync(string deviceId)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+            
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/realtimeUsage";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<RealtimeUsage>(HttpMethod.Get, url);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
