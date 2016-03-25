@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Api.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\RealtimeUsage.cs" />
     <Compile Include="Model\PlugRelayStatus.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
