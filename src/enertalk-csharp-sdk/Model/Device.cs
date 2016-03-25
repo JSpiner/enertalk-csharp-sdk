@@ -15,7 +15,7 @@ namespace Enertalk.Model
         public string Model { get; set; }
 
         [JsonProperty("createdAt")]
-        public int CreatedAt { get; set; }
+        public long CreatedAt { get; set; }
 
         [JsonProperty("uuid")]
         public string UUID { get; set; }
