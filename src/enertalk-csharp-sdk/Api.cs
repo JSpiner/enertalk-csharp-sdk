@@ -63,6 +63,15 @@ namespace Enertalk
             IsAuthorized = true;
         }
 
+        public async Task<Device[]> GetDevices()
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            string url = "https://api.encoredtech.com/1.2/devices/list";
+            return await SendWebRequest<Device[]>(HttpMethod.Get, url);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
