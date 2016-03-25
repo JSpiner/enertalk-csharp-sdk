@@ -249,7 +249,11 @@ namespace Enertalk
                 var formatter = new JsonMediaTypeFormatter();
                 var request = new HttpRequestMessage(method, url);
                 if (value != null)
-                    request.Content = new ObjectContent(value.GetType(), value, formatter);
+                    if (value is string)
+                        request.Content = new StringContent((string)value);
+                    else
+                        request.Content = new ObjectContent(value.GetType(), value, formatter);
+
                 if (IsAuthorized)
                 {
                     request.Headers.Add("Authorization", string.Format("{0} {1}", _token.TokenType, _token.AccessToken));
