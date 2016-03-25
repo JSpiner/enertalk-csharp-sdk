@@ -173,6 +173,22 @@ namespace Enertalk
             return await SendWebRequest<DeviceInformation>(HttpMethod.Get, url);
         }
 
+        public async Task<DeviceInformation[]> GetDeviceMeteringUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            var value = new
+            {
+                start = startDateTime.ToUnixTime(),
+                end = endDateTime.ToUnixTime(),
+            };
+
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsages";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<DeviceInformation[]>(HttpMethod.Get, url);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
@@ -198,5 +214,6 @@ namespace Enertalk
                 return await response.Content.ReadAsAsync<T>();
             }
         }
+
     }
 }
