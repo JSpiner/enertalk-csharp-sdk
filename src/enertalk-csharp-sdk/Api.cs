@@ -37,6 +37,26 @@ namespace Enertalk
             string url = "https://enertalk-auth.encoredtech.com/token";
             _token = await SendWebRequest<Token>(HttpMethod.Post, url, value);
             _token.TokenType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(_token.TokenType);
+
+            IsAuthorized = true;
+        }
+
+        public async Task RefreshToken()
+        {
+            IsAuthorized = false;
+
+            var value = new
+            {
+                grant_type = "refresh_token",
+                refresh_token = _token.RefreshToken,
+            };
+
+            _token = null;
+
+            string url = "https://enertalk-auth.encoredtech.com/refresh";
+            _token = await SendWebRequest<Token>(HttpMethod.Post, url, value);
+            _token.TokenType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(_token.TokenType);
+
             IsAuthorized = true;
         }
 
