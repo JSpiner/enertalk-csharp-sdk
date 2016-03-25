@@ -189,6 +189,23 @@ namespace Enertalk
             return await SendWebRequest<MeteringUsage[]>(HttpMethod.Get, url);
         }
 
+        public async Task<PeriodicUsages[]> GetDevicePeriodicUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            var value = new
+            {
+                period = "hourly",
+                start = startDateTime.ToUnixTime(),
+                end = endDateTime.ToUnixTime(),
+            };
+
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/usages";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<PeriodicUsages[]>(HttpMethod.Get, url);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler

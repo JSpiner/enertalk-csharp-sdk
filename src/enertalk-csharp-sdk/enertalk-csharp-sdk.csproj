@@ -64,6 +64,7 @@
     <Compile Include="EnertalkUtils.cs" />
     <Compile Include="Model\DeviceInformation.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\PeriodicUsages.cs" />
     <Compile Include="Model\MeteringUsage.cs" />
     <Compile Include="Model\ForcastUsage.cs" />
     <Compile Include="Model\PushNotificationStatus.cs" />
