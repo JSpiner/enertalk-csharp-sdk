@@ -127,6 +127,22 @@ namespace Enertalk
             return await SendWebRequest<Status>(HttpMethod.Get, url);
         }
 
+        public async Task<Status> RegisterPushIdAsync(string deviceId, bool registerId)
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            var value = new
+            {
+                type = "AND",
+                regId = registerId
+            };
+
+            string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
+            string url = string.Format(template, deviceId);
+            return await SendWebRequest<Status>(HttpMethod.Post, url, value);
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
