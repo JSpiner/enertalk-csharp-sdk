@@ -26,6 +26,9 @@ namespace Enertalk
 
         public async Task AuthorizeAsync(string code)
         {
+            IsAuthorized = false;
+            _token = null;
+
             var value = new
             {
                 client_id = ClientId,
