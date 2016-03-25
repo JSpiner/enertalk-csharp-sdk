@@ -12,7 +12,7 @@ namespace Enertalk
         {
         }
         
-        public async Task<Device[]> GetDevices()
+        public async Task<Device[]> GetDevicesAsync()
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
