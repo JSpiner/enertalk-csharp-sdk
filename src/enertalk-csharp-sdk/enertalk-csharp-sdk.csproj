@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api.cs" />
+    <Compile Include="Model\DeviceInformation.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\ForcastUsage.cs" />
     <Compile Include="Model\Status.cs" />
