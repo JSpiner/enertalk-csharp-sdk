@@ -60,7 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api.cs" />
+    <Compile Include="PlugApi.cs" />
+    <Compile Include="HomeApi.cs" />
+    <Compile Include="BaseApi.cs" />
     <Compile Include="EnertalkUtils.cs" />
     <Compile Include="Model\UserInformation.cs" />
     <Compile Include="Model\DeviceInformation.cs" />
