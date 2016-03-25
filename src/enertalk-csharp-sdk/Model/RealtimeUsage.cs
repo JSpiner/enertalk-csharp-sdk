@@ -15,13 +15,13 @@ namespace Enertalk.Model
         public long Current { get; set; }
 
         [JsonProperty("activePower")]
-        public long ActivePower { get; set; }
+        public long? ActivePower { get; set; }
 
         [JsonProperty("apparentPower")]
-        public long ApparentPower { get; set; }
+        public long? ApparentPower { get; set; }
 
         [JsonProperty("reactivePower")]
-        public long ReactivePower { get; set; }
+        public long? ReactivePower { get; set; }
 
         [JsonProperty("powerFactor")]
         public long PowerFactor { get; set; }
