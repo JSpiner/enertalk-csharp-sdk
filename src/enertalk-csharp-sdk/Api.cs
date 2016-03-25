@@ -88,7 +88,7 @@ namespace Enertalk
                 throw new InvalidOperationException();
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/relay?mode={1}";
-            string url = string.Format(template, deviceId);
+            string url = string.Format(template, deviceId, mode);
             return await SendWebRequestAsync<PlugRelayStatus>(HttpMethod.Put, url, mode);
         }
 
