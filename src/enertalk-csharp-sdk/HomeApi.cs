@@ -11,7 +11,16 @@ namespace Enertalk
             : base(clientId, secretId)
         {
         }
-        
+
+        public async Task<Device> GetDeviceAsync()
+        {
+            if (!IsAuthorized)
+                throw new InvalidOperationException();
+
+            string url = "https://enertalk-auth.encoredtech.com/uuid";
+            return await SendWebRequestAsync<Device>(HttpMethod.Get, url);
+        }
+
         public async Task<PushNotificationStatus> TogglePushServiceAsync(string deviceId, bool enabled)
         {
             if (!IsAuthorized)
