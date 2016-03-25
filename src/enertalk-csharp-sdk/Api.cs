@@ -102,7 +102,7 @@ namespace Enertalk
             return await SendWebRequest<RealtimeUsage>(HttpMethod.Get, url);
         }
 
-        public async Task<Status> TogglePushServiceAsync(string deviceId, bool enabled)
+        public async Task<PushNotificationStatus> TogglePushServiceAsync(string deviceId, bool enabled)
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
@@ -114,20 +114,20 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<Status>(HttpMethod.Put, url, value);
+            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Put, url, value);
         }
 
-        public async Task<Status> GetPushNotificationSettingAsync(string deviceId)
+        public async Task<PushNotificationStatus> GetPushNotificationSettingAsync(string deviceId)
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
             
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<Status>(HttpMethod.Get, url);
+            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Get, url);
         }
 
-        public async Task<Status> RegisterPushIdAsync(string deviceId, bool registerId)
+        public async Task<PushNotificationStatus> RegisterPushIdAsync(string deviceId, bool registerId)
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
@@ -140,7 +140,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/events/push";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<Status>(HttpMethod.Post, url, value);
+            return await SendWebRequest<PushNotificationStatus>(HttpMethod.Post, url, value);
         }
 
         public async Task<ForcastUsage> GetDeviceForecastUsageAsync(string deviceId)

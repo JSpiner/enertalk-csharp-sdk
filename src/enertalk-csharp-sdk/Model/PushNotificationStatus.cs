@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Enertalk.Model
 {
-    public class Status
+    public class PushNotificationStatus
     {
         [JsonProperty("status")]
         public string Status { get; set; }

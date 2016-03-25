@@ -64,7 +64,7 @@
     <Compile Include="Model\DeviceInformation.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\ForcastUsage.cs" />
-    <Compile Include="Model\Status.cs" />
+    <Compile Include="Model\PushNotificationStatus.cs" />
     <Compile Include="Model\RealtimeUsage.cs" />
     <Compile Include="Model\PlugRelayStatus.cs" />
     <Compile Include="Model\Token.cs" />
