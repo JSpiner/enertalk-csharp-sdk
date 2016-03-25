@@ -60,7 +60,7 @@ namespace Enertalk
             IsAuthorized = true;
         }
 
-        private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value)
+        private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
             {
@@ -72,7 +72,8 @@ namespace Enertalk
             {
                 var formatter = new JsonMediaTypeFormatter();
                 var request = new HttpRequestMessage(method, url);
-                request.Content = new ObjectContent(value.GetType(), value, formatter);
+                if (value != null)
+                    request.Content = new ObjectContent(value.GetType(), value, formatter);
                 if (IsAuthorized)
                 {
                     request.Headers.Add("Authorization", string.Format("{0} {1}", _token.TokenType, _token.AccessToken));
