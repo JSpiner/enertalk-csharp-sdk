@@ -236,6 +236,34 @@ namespace Enertalk
             return await SendWebRequest<UserInformation>(HttpMethod.Put, url, userInformation);
         }
 
+        private async Task SendWebRequest(HttpMethod method, string url, object value = null)
+        {
+            var handler = new HttpClientHandler
+            {
+                Proxy = new WebProxy("http://127.0.0.1:8888"),
+                UseProxy = true,
+            };
+
+            using (var client = new HttpClient(handler))
+            {
+                var formatter = new JsonMediaTypeFormatter();
+                var request = new HttpRequestMessage(method, url);
+                if (value != null)
+                    if (value is string)
+                        request.Content = new StringContent((string)value);
+                    else
+                        request.Content = new ObjectContent(value.GetType(), value, formatter);
+
+                if (IsAuthorized)
+                {
+                    request.Headers.Add("Authorization", string.Format("{0} {1}", _token.TokenType, _token.AccessToken));
+                }
+
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
         {
             var handler = new HttpClientHandler
