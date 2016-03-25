@@ -163,17 +163,17 @@ namespace Enertalk
             return await SendWebRequest<DeviceInformation>(HttpMethod.Get, url);
         }
 
-        public async Task<DeviceInformation> GetDeviceMeteringUsageAsync(string deviceId)
+        public async Task<MeteringUsage> GetDeviceMeteringUsageAsync(string deviceId)
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsage";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<DeviceInformation>(HttpMethod.Get, url);
+            return await SendWebRequest<MeteringUsage>(HttpMethod.Get, url);
         }
 
-        public async Task<DeviceInformation[]> GetDeviceMeteringUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
+        public async Task<MeteringUsage[]> GetDeviceMeteringUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
         {
             if (!IsAuthorized)
                 throw new InvalidOperationException();
@@ -186,7 +186,7 @@ namespace Enertalk
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsages";
             string url = string.Format(template, deviceId);
-            return await SendWebRequest<DeviceInformation[]>(HttpMethod.Get, url);
+            return await SendWebRequest<MeteringUsage[]>(HttpMethod.Get, url);
         }
 
         private async Task<T> SendWebRequest<T>(HttpMethod method, string url, object value = null)
