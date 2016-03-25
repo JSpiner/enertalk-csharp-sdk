@@ -10,17 +10,17 @@ namespace Enertalk
 {
     public class Api
     {
-        private string _clientId;
-
         private string _secretId;
 
         private Token _token;
         
         public Api(string clientId, string secretId)
         {
-            _clientId = clientId;
+            ClientId = clientId;
             _secretId = secretId;
         }
+
+        public string ClientId { get; private set; }
 
         public bool IsAuthorized { get; private set; }
 
@@ -28,7 +28,7 @@ namespace Enertalk
         {
             var value = new
             {
-                client_id = _clientId,
+                client_id = ClientId,
                 client_secret = _secretId,
                 grant_type = "authorization_code",
                 code = code,
