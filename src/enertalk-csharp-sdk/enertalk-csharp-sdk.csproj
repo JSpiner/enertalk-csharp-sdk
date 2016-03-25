@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Api.cs" />
     <Compile Include="EnertalkUtils.cs" />
+    <Compile Include="Model\UserInformation.cs" />
     <Compile Include="Model\DeviceInformation.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\PeriodicUsages.cs" />
