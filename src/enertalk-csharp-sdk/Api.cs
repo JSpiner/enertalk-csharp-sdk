@@ -178,15 +178,11 @@ namespace Enertalk
             if (!IsAuthorized)
                 throw new InvalidOperationException();
 
-            var value = new
-            {
-                start = startDateTime.ToUnixTime(),
-                end = endDateTime.ToUnixTime(),
-            };
+            var value = string.Format("start={0}&end={1}", startDateTime.ToUnixTime(), endDateTime.ToUnixTime());
 
             string template = "https://api.encoredtech.com/1.2/devices/{0}/meteringUsages";
             string url = string.Format(template, deviceId);
-            return await SendWebRequestAsync<MeteringUsage[]>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<MeteringUsage[]>(HttpMethod.Get, url, value);
         }
 
         public async Task<PeriodicUsages[]> GetDevicePeriodicUsagesAsync(string deviceId, DateTime startDateTime, DateTime endDateTime)
@@ -194,16 +190,11 @@ namespace Enertalk
             if (!IsAuthorized)
                 throw new InvalidOperationException();
 
-            var value = new
-            {
-                period = "hourly",
-                start = startDateTime.ToUnixTime(),
-                end = endDateTime.ToUnixTime(),
-            };
-
+            var value = string.Format("period={0}&start={1}&end={2}", "hourly", startDateTime.ToUnixTime(), endDateTime.ToUnixTime());
+            
             string template = "https://api.encoredtech.com/1.2/devices/{0}/usages";
             string url = string.Format(template, deviceId);
-            return await SendWebRequestAsync<PeriodicUsages[]>(HttpMethod.Get, url);
+            return await SendWebRequestAsync<PeriodicUsages[]>(HttpMethod.Get, url, value);
         }
 
         public async Task<RealtimeUsage> GetRealtimeUsagesAsync(string deviceId)
